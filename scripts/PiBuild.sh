@@ -17,7 +17,12 @@ case "$1" in
 ;;
  
 
-stop|reload|restart|force-reload)
+stop|reload|restart|build2pi)
+#obviously need a way to enter the proper pi
+  echo Building for the Pi
+		env GOOS=linux GOARCH=arm GOARM=5 go build
+		scp * jalspach@10.0.0.110:/home/jalspach/Public
+
 	;;
   *)
 	echo "Usage: $N {build|rebuild}" >&2
