@@ -11,17 +11,28 @@ func main() {
 	fmt.Println("opening gpio")
 	err := rpio.Open()
 	if err != nil {
-		panic(fmt.Sprint("unable to open gpio", err.Error()))
+		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
 	}
 
 	defer rpio.Close()
 
-	pin := rpio.Pin(17)
-	pin.Output()
+	green := rpio.Pin(17)
+	green.Output()
+
+	yellow := rpio.Pin(27)
+	yellow.Output()
+
+	red := rpio.Pin(22)
+	red.Output()
 
 	for x := 0; x < 20; x++ {
-		pin.Toggle()
+		green.Toggle()
 		time.Sleep(time.Second / 5)
+		yellow.Toggle()
+		time.Sleep(time.Second / 5)
+		red.Toggle()
+		time.Sleep(time.Second / 5)
+
 	}
 
 }
